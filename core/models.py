@@ -19,14 +19,19 @@ class Bill(models.Model):
 
 
 class VoteResult(models.Model):
+    VOTE_TYPES = (
+        (1, "Supported"),
+        (2, "Opposed"),
+    )
+
     id = models.BigIntegerField(primary_key=True)
     legislator_id = models.BigIntegerField()
     vote_id = models.BigIntegerField()
-    vote_type = models.IntegerField()
+    vote_type = models.IntegerField(choices=VOTE_TYPES)
 
     def __str__(self):
         return (
-            f"Vote {self.id} - Legislator {self.legislator_id} - Type {self.vote_type}"
+            f"Vote {self.id} - Legislator {self.legislator_id} - Type {self.get_vote_type_display()}"
         )
 
 

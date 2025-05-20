@@ -94,16 +94,17 @@ def legislator_detail(request, legislator_id):
         bill = Bill.objects.filter(
             id=Vote.objects.filter(id=vote.vote_id).first().bill_id
         ).first()
-        if vote.vote_type == 1:
+
+        if vote.get_vote_type_display() == "Supported":
             bills_supported += 1
-        elif vote.vote_type == 2:
+        elif vote.get_vote_type_display() == "Opposed":
             bills_opposed += 1
 
         vote_data.append(
             {
                 "bill_title": bill.title if bill else "Unknown",
                 "bill_id": bill.id if bill else None,
-                "vote_type": "Supporting" if vote.vote_type == 1 else "Opposing",
+                "vote_type": vote.get_vote_type_display(),
             }
         )
 
