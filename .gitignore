@@ -7,5 +7,3 @@ __pycache__/
 .DS_Store
 /staticfiles/
 /media/
-**/migrations/*.py
-!**/migrations/__init__.py
