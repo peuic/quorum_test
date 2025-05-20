@@ -25,6 +25,8 @@ def legislators(request):
     return render(request, 'core/legislators.html', {'legislator_data': legislator_data})
 
 def bills(request):
+    votes_in_favor = 0
+    votes_against = 0
     bills = Bill.objects.all()
 
     bill_data = []
@@ -34,9 +36,7 @@ def bills(request):
         if vote:
             votes_in_favor = VoteResult.objects.filter(vote_id=vote.id, vote_type=1).count()
             votes_against = VoteResult.objects.filter(vote_id=vote.id, vote_type=2).count()
-        else:
-            votes_in_favor = 0
-            votes_against = 0
+
 
         sponsor = Legislator.objects.filter(id=bill.sponsor_id).first()
 
@@ -80,6 +80,10 @@ def legislator_detail(request, legislator_id):
     })
 
 def bill_detail(request, bill_id):
+    votes_in_favor = 0
+    votes_against = 0
+    legislator_vote_data = []
+
     bill = get_object_or_404(Bill, id=bill_id)
     vote = Vote.objects.filter(bill_id=bill.id).first()
 
@@ -96,10 +100,6 @@ def bill_detail(request, bill_id):
 
         votes_in_favor = legislator_votes.filter(vote_type=1).count()
         votes_against = legislator_votes.filter(vote_type=2).count()
-    else:
-        votes_in_favor = 0
-        votes_against = 0
-        legislator_vote_data = []
 
     sponsor = Legislator.objects.filter(id=bill.sponsor_id).first()
 
