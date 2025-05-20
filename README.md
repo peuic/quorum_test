@@ -2,6 +2,8 @@
 
 Django Project for tracking bill votes
 
+## Running with Docker
+
 ## Prerequisites
 
 Make sure you have the following software installed on your system:
@@ -9,8 +11,6 @@ Make sure you have the following software installed on your system:
 [Docker](https://www.docker.com/)
 
 [Docker Compose](https://docs.docker.com/compose/)
-
-## Running with Docker
 
 **1. Build the image**
 ```
@@ -34,4 +34,16 @@ http://localhost:8000/
 Stopping container:
 ```
 docker-compose down
+```
+## Running with Script
+
+Make script executable:
+
+```
+chmod +x run.sh
+```
+
+Execute the script:
+```
+./run.sh
 ```
