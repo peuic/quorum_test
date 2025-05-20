@@ -14,7 +14,7 @@ Make sure you have the following software installed on your system:
 
 **1. Build the image**
 ```
-docker-compose build
+docker compose build
 ```
 This should:
 - Install project dependencies
@@ -24,7 +24,7 @@ This should:
   
 2. Start the container
 ```
-docker-compose up
+docker compose up
 ```
 3. access it through the following url:
 ```
@@ -33,7 +33,7 @@ http://localhost:8000/
 
 Stopping container:
 ```
-docker-compose down
+docker compose down
 ```
 ## Running with Script
 
