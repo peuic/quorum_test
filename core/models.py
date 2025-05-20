@@ -31,7 +31,7 @@ class VoteResult(models.Model):
 
     def __str__(self):
         return (
-            f"Vote {self.id} - Legislator {self.legislator_id} - Type {self.get_vote_type_display()}"
+            f"Vote: {self.id} Legislator: {self.legislator_id} Type: {self.vote_type}"
         )
 
 
