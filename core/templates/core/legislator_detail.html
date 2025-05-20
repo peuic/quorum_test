@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ legislator.name }}{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">{{ legislator.name }}</h1>
+<p class="text-center">Votes for Bills</p>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Bill Title</th>
+            <th>Vote</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vote in vote_data %}
+            <tr>
+                <td>
+                    <a href="{% url 'bill_detail' vote.bill_id %}" style="text-decoration: underline; color: black;">
+                        {{ vote.bill_title }}
+                    </a>
+                </td>
+                <td>{{ vote.vote_type }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

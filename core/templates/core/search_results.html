@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Search Results</h1>
+
+{% if query %}
+    <p class="text-center">Results for "<strong>{{ query }}</strong>":</p>
+
+    <h2>Legislators</h2>
+    {% if legislators %}
+        <ul class="list-group mb-4">
+            {% for legislator in legislators %}
+                <li class="list-group-item">
+                    <a href="/legislators/{{ legislator.id }}/">{{ legislator.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No legislators found.</p>
+    {% endif %}
+
+    <h2>Bills</h2>
+    {% if bills %}
+        <ul class="list-group">
+            {% for bill in bills %}
+                <li class="list-group-item">
+                    <a href="/bills/{{ bill.id }}/">{{ bill.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bills found.</p>
+    {% endif %}
+{% else %}
+    <p class="text-center">Enter a search term to find legislators or bills.</p>
+{% endif %}
+{% endblock %}

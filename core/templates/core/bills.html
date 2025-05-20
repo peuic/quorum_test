@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Bills{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Bills</h1>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Supporters</th>
+            <th>Opposers</th>
+            <th>Primary Sponsor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bill in bill_data %}
+            <tr>
+                <td>{{ bill.id }}</td>
+                <td>
+                    <!-- Torna o título da Bill clicável -->
+                    <a href="{% url 'bill_detail' bill.id %}" style="text-decoration: underline; color: black;">
+                        {{ bill.title }}
+                    </a>
+                </td>
+                <td>{{ bill.votes_in_favor }}</td>
+                <td>{{ bill.votes_against }}</td>
+                <td>{{ bill.sponsor }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

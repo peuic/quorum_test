@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ bill.title }}{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">{{ bill.title }}</h1>
+
+<p>
+    <strong>Sponsor:</strong>
+    {% if sponsor != "Unknown" %}
+        <a href="{% url 'legislator_detail' sponsor_id %}" style="text-decoration: underline; color: black;">
+            {{ sponsor }}
+        </a>
+    {% else %}
+        {{ sponsor }}
+    {% endif %}
+</p>
+
+<h2>Votes Summary</h2>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Vote Type</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Supporting</td>
+            <td>{{ votes_in_favor }}</td>
+        </tr>
+        <tr>
+            <td>Opposing</td>
+            <td>{{ votes_against }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Votes per Legislator</h2>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Legislator</th>
+            <th>Vote</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vote in legislator_vote_data %}
+            <tr>
+                <td>
+                    <a href="{% url 'legislator_detail' vote.legislator_id %}" style="text-decoration: underline; color: black;">
+                        {{ vote.legislator_name }}
+                    </a>
+                </td>
+                <td>{{ vote.vote_type }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

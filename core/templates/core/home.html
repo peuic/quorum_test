@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">Welcome to Bill Tracker</h1>
+    <p class="lead">Explore the voting records of legislators and bills.</p>
+    <div class="mt-4">
+        <a href="/bills/" class="btn btn-primary btn-lg me-2">View Bills</a>
+        <a href="/legislators/" class="btn btn-secondary btn-lg">View Legislators</a>
+    </div>
+</div>
+{% endblock %}

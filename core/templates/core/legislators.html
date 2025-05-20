@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Legislators{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Legislators Votes</h1>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Total Votes</th>
+            <th>Supporting</th>
+            <th>Opposing</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for legislator in legislator_data %}
+            <tr>
+                <td>{{ legislator.id }}</td>
+                <td>
+                    <a href="{% url 'legislator_detail' legislator.id %}" style="color: black; text-decoration: underline;">
+                        {{ legislator.name }}
+                    </a>
+                </td>
+                <td>{{ legislator.total_votes }}</td>
+                <td>{{ legislator.votes_in_favor }}</td>
+                <td>{{ legislator.votes_against }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
