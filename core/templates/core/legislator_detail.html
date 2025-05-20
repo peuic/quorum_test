@@ -3,27 +3,53 @@
 {% block title %}{{ legislator.name }}{% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">{{ legislator.name }}</h1>
-<p class="text-center">Votes for Bills</p>
+<div class="container">
+    <h1 class="text-center mb-4">{{ legislator.name }}</h1>
+    <h2 class="text-center">Vote summary</h2>
 
-<table class="table table-striped table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>Bill Title</th>
-            <th>Vote</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for vote in vote_data %}
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6">
+            <table class="table table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Vote</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Supported bills</td>
+                        <td>{{ bills_supported }}</td>
+                    </tr>
+                    <tr>
+                        <td>Opposed bills</td>
+                        <td>{{ bills_opposed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-5">Vote details</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
-                <td>
-                    <a href="{% url 'bill_detail' vote.bill_id %}" style="text-decoration: underline; color: black;">
-                        {{ vote.bill_title }}
-                    </a>
-                </td>
-                <td>{{ vote.vote_type }}</td>
+                <th>Bill Title</th>
+                <th>Vote</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for vote in vote_data %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bill_detail' vote.bill_id %}" style="text-decoration: underline; color: black;">
+                            {{ vote.bill_title }}
+                        </a>
+                    </td>
+                    <td>{{ vote.vote_type }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

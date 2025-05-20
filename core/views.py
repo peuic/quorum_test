@@ -87,11 +87,18 @@ def legislator_detail(request, legislator_id):
     legislator = get_object_or_404(Legislator, id=legislator_id)
     votes = VoteResult.objects.filter(legislator_id=legislator.id)
     vote_data = []
+    bills_supported = 0
+    bills_opposed = 0
 
     for vote in votes:
         bill = Bill.objects.filter(
             id=Vote.objects.filter(id=vote.vote_id).first().bill_id
         ).first()
+        if vote.vote_type == 1:
+            bills_supported += 1
+        elif vote.vote_type == 2:
+            bills_opposed += 1
+
         vote_data.append(
             {
                 "bill_title": bill.title if bill else "Unknown",
@@ -106,6 +113,8 @@ def legislator_detail(request, legislator_id):
         {
             "legislator": legislator,
             "vote_data": vote_data,
+            "bills_supported": bills_supported,
+            "bills_opposed": bills_opposed,
         },
     )
 
