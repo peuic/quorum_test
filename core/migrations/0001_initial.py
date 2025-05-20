@@ -4,42 +4,40 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Bill',
+            name="Bill",
             fields=[
-                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=500)),
-                ('sponsor_id', models.BigIntegerField()),
+                ("id", models.BigIntegerField(primary_key=True, serialize=False)),
+                ("title", models.CharField(max_length=500)),
+                ("sponsor_id", models.BigIntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Legislator',
+            name="Legislator",
             fields=[
-                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=255)),
+                ("id", models.BigIntegerField(primary_key=True, serialize=False)),
+                ("name", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Vote',
+            name="Vote",
             fields=[
-                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
-                ('bill_id', models.BigIntegerField()),
+                ("id", models.BigIntegerField(primary_key=True, serialize=False)),
+                ("bill_id", models.BigIntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='VoteResult',
+            name="VoteResult",
             fields=[
-                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
-                ('legislator_id', models.BigIntegerField()),
-                ('vote_id', models.BigIntegerField()),
-                ('vote_type', models.IntegerField()),
+                ("id", models.BigIntegerField(primary_key=True, serialize=False)),
+                ("legislator_id", models.BigIntegerField()),
+                ("vote_id", models.BigIntegerField()),
+                ("vote_type", models.IntegerField()),
             ],
         ),
     ]
