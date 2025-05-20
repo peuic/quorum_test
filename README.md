@@ -47,3 +47,9 @@ Execute the script:
 ```
 ./run.sh
 ```
+
+## Running tests
+
+```
+python manage.py test
+```
