@@ -3,11 +3,11 @@ from django.core.management.base import BaseCommand
 from django.apps import apps
 
 class Command(BaseCommand):
-    help = 'Importa dados de um arquivo CSV para o modelo especificado'
+    help = 'Load data from a CSV file into a specified model'
 
     def add_arguments(self, parser):
-        parser.add_argument('model_name', type=str, help='Nome do modelo para o qual os dados serão importados')
-        parser.add_argument('csv_file', type=str, help='Caminho para o arquivo CSV')
+        parser.add_argument('model_name', type=str, help='Model names to be imported')
+        parser.add_argument('csv_file', type=str, help='Path to CSV')
 
     def handle(self, *args, **kwargs):
         model_name = kwargs['model_name']
@@ -17,7 +17,7 @@ class Command(BaseCommand):
             # Obtém o modelo dinamicamente
             model = apps.get_model('core', model_name)
         except LookupError:
-            self.stderr.write(self.style.ERROR(f"Modelo '{model_name}' não encontrado."))
+            self.stderr.write(self.style.ERROR(f"Model '{model_name}' not found."))
             return
 
         try:
@@ -30,10 +30,10 @@ class Command(BaseCommand):
                         defaults=row
                     )
                     if created:
-                        self.stdout.write(self.style.SUCCESS(f"{model_name} com ID {obj.id} criado."))
+                        self.stdout.write(self.style.SUCCESS(f"{model_name} with ID {obj.id} created."))
                     else:
-                        self.stdout.write(self.style.WARNING(f"{model_name} com ID {obj.id} atualizado."))
+                        self.stdout.write(self.style.WARNING(f"{model_name} with ID {obj.id} updated."))
         except FileNotFoundError:
-            self.stderr.write(self.style.ERROR(f"Arquivo '{csv_file}' não encontrado."))
+            self.stderr.write(self.style.ERROR(f"File '{csv_file}' not found."))
         except Exception as e:
-            self.stderr.write(self.style.ERROR(f"Erro ao importar dados: {str(e)}"))
+            self.stderr.write(self.style.ERROR(f"Error importing data: {str(e)}"))
