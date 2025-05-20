@@ -134,7 +134,7 @@ def bill_detail(request, bill_id):
             {
                 "legislator_name": Legislator.objects.get(id=lv.legislator_id).name,
                 "legislator_id": lv.legislator_id,
-                "vote_type": "Supporting" if lv.vote_type == 1 else "Opposing",
+                "vote_type": lv.get_vote_type_display(),
             }
             for lv in legislator_votes
         ]
